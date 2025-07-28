@@ -36,6 +36,60 @@
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<link href="fonts/font-awesome-4.2.0/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+	/* Sidebar offcanvas responsive fix */
+	#fjrjnr-offcanvas {
+	    display: none;
+	    position: fixed;
+	    top: 0; left: 0;
+	    width: 80vw;
+	    max-width: 320px;
+	    height: 100vh;
+	    background: #fff;
+	    z-index: 9999;
+	    overflow-y: auto;
+	    overflow-x: auto; /* Tambahan agar bisa scroll horizontal */
+	    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+	    transition: transform 0.3s;
+	    transform: translateX(-100%);
+	}
+	#fjrjnr-offcanvas.active {
+	    display: block !important; /* pastikan override */
+	    transform: translateX(0);
+	}
+	@media screen and (max-width: 768px) {
+	    #fjrjnr-offcanvas {
+	        /* tetap display:none kecuali .active */
+	    }
+	    .fjrjnr-offcanvas-toggle {
+	        display: block;
+	    }
+	}
+	.fjrjnr-offcanvas-toggle {
+	    display: none;
+	    position: fixed;
+	    top: 20px;
+	    left: 20px;
+	    z-index: 10001;
+	    background: #fff;
+	    border: none;
+	    border-radius: 8px;
+	    padding: 8px 16px;
+	    font-size: 1.5rem;
+	    cursor: pointer;
+	}
+	.fjrjnr-offcanvas-close {
+	    position: absolute;
+	    top: 20px;
+	    right: 20px;
+	    background: #eee;
+	    border: none;
+	    border-radius: 8px;
+	    padding: 8px 16px;
+	    font-size: 1.2rem;
+	    cursor: pointer;
+	}
+	</style>
 	</head>
 	<body>
 	
@@ -388,6 +442,52 @@ document.getElementById('lihatTourBtn').addEventListener('click', function(e) {
 function closeVirtualTour() {
     document.getElementById('virtualTourModal').style.display = 'none';
 }
+</script>
+
+<!-- Offcanvas Toggle Button (hamburger) -->
+<button class="fjrjnr-offcanvas-toggle" onclick="openOffcanvas()" aria-label="Menu">&#9776;</button>
+
+<!-- Offcanvas Sidebar -->
+<div id="fjrjnr-offcanvas">
+    <button class="fjrjnr-offcanvas-close" onclick="closeOffcanvas()" aria-label="Tutup">&times;</button>
+    <nav>
+        <ul>
+            <li><a href="/">Beranda</a></li>
+            <li><a href="tentang.html">Tentang</a></li>
+            <li><a href="tour.html">Tour</a></li>
+            <li><a href="biaya.html">Biaya</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+function openOffcanvas() {
+    document.getElementById('fjrjnr-offcanvas').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeOffcanvas() {
+    document.getElementById('fjrjnr-offcanvas').classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.addEventListener('click', function(e) {
+    var sidebar = document.getElementById('fjrjnr-offcanvas');
+    var toggle = document.querySelector('.fjrjnr-offcanvas-toggle');
+    if (sidebar.classList.contains('active')) {
+        if (!sidebar.contains(e.target) && e.target !== toggle) {
+            closeOffcanvas();
+        }
+    }
+});
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        closeOffcanvas();
+    }
+});
+</script>
+
+	</body>
+</html>
+});
 </script>
 
 	</body>
