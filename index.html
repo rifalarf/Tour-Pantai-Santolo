@@ -61,7 +61,7 @@
 						<div class="fjrjnr-left-position">
 							<h2 class="animate-box">Temukan keindahan wisata pantai santolo disini</h2>
 							<p class="animate-box">
-							<a href="tour.html" class="btn btn-outline">
+							<a href="#" id="lihatTourBtn" class="btn btn-outline">
 								<i class="icon-play2"></i> Lihat Tour
 							</a>
 							<a href="tour.html" class="btn btn-primary">Destinasi</a>
@@ -375,6 +375,21 @@
 		$(document).ready(function() {animateWindow();});
 		$(window).resize(function(event) {animateWindow();});
 	</script>
+	<script>
+document.getElementById('lihatTourBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Hapus konten utama
+    document.body.innerHTML = '';
+    // Tambahkan iframe virtual tour
+    var iframe = document.createElement('iframe');
+    iframe.src = "virtualtour/index.htm";
+    iframe.style = "position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:18px;";
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+    iframe.title = "Virtual Tour Pantai Santolo";
+    document.body.appendChild(iframe);
+});
+</script>
 
 	</body>
 </html>
