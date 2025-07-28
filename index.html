@@ -375,20 +375,19 @@
 		$(document).ready(function() {animateWindow();});
 		$(window).resize(function(event) {animateWindow();});
 	</script>
-	<script>
+	<div id="virtualTourModal" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:#000a;">
+  <button onclick="closeVirtualTour()" style="position:absolute;top:20px;right:30px;z-index:10000;font-size:2rem;background:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;">Tutup</button>
+  <iframe src="virtualtour/index.htm" style="width:100vw;height:100vh;border:0;border-radius:18px;" allowfullscreen loading="lazy" title="Virtual Tour Pantai Santolo"></iframe>
+</div>
+
+<script>
 document.getElementById('lihatTourBtn').addEventListener('click', function(e) {
     e.preventDefault();
-    // Hapus konten utama
-    document.body.innerHTML = '';
-    // Tambahkan iframe virtual tour
-    var iframe = document.createElement('iframe');
-    iframe.src = "virtualtour/index.htm";
-    iframe.style = "position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:18px;";
-    iframe.allowFullscreen = true;
-    iframe.loading = "lazy";
-    iframe.title = "Virtual Tour Pantai Santolo";
-    document.body.appendChild(iframe);
+    document.getElementById('virtualTourModal').style.display = 'block';
 });
+function closeVirtualTour() {
+    document.getElementById('virtualTourModal').style.display = 'none';
+}
 </script>
 
 	</body>
